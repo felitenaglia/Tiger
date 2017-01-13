@@ -1,0 +1,76 @@
+/* correct declarations */
+let
+  type arrtype1 = array of int
+  type rectype1 = {name : string, address : string, id : int, age : int}
+  type arrtype2 = array of rectype1
+  type rectype2 = {name : string, dates : arrtype1}
+
+  type arrtype3 = array of string
+
+  var arr1 := arrtype1 [10] of 0
+  var arr2 := arrtype2 [5] of
+  	 rectype1 {name="aname", address="somewhere", id=0, age=0}
+  var arr3 : arrtype3 := arrtype3 [100] of ""
+
+  var rec1 := rectype1 {name="Kapoios", address="Kapou", id=02432, age=44}
+  var rec2 := rectype2 {name="Allos", dates=arrtype1 [3] of 1900}
+
+/* De acá */
+type arrStr = array of string
+type arrInt = array of int
+
+function printNum(x:int) = 
+    let 
+        var res:arrStr := arrStr [10] of "" 
+        var pos:int := 9	            
+    in
+        if (x=0) then
+           print("0")
+        else(
+        while (x<>0 & pos>=0) do
+            (res[pos]:=chr((x-((x/10)*10))+48);
+             x:=x/10;
+             pos:=pos-1);
+        
+       for i:= pos+1 to 9 do
+            print(res[i]))
+    end
+/* Hasta acá */
+
+
+in
+  arr1[0] := 1;
+  arr1[9] := 3;
+  arr2[3].name := "kati2";
+  arr2[1].age := 23;
+  arr3[34] := "sfd";
+
+  rec1.name := "sdf";
+  rec2.dates[0] := 2323;
+  rec2.dates[2] := 2323; 
+  for i:=0 to 9 do
+     (printNum(i);print(": ");printNum(arr1[i]);print("\n"));
+  print("\n");
+  for i:=0 to 4 do
+     (printNum(i);
+      print(": ");
+      print(arr2[i].name);
+      print(" | ");
+      print(arr2[i].address);
+      print(" | ");
+      printNum(arr2[i].id);
+      print(" | ");
+      printNum(arr2[i].age);
+      print("\n"));
+
+      print("\n");
+      print(rec1.name);
+      print(" | ");
+      print(rec1.address);
+      print(" | ");
+      printNum(rec1.id);
+      print(" | ");
+      printNum(rec1.age);
+      print("\n");0
+  
+end
